@@ -1,10 +1,12 @@
 import React, { useCallback, useEffect, useState, useRef } from "react";
 import { myCustomUseSocketHook } from "../context/SocketProvider";
 import peer from "../services/peer";
+import toast from "react-hot-toast";
 
 const Room = () => {
   const socket = myCustomUseSocketHook();
   const [remoteSocketId, setRemoteSocketId] = useState(null);
+  const [callMaker, setCallMaker] = useState(null);
   const [myStream, setMyStream] = useState(null);
   const [remoteStream, setRemoteStream] = useState(null);
   const videoRef = useRef(null);
@@ -22,6 +24,7 @@ const Room = () => {
     });
 
     const offer = await peer.makeOffer();
+    setCallMaker(true);
     socket.emit("user:call", { to: remoteSocketId, offer });
     // console.log(`Remote ${remoteSocketId}`);
 
@@ -124,36 +127,65 @@ const Room = () => {
   }, [myStream, remoteStream]);
 
   return (
-    <>
-      <h1>Room</h1>
-      <h4>{remoteSocketId ? "Connected" : "No one in the room"}</h4>
-      {remoteSocketId && <button onClick={handleCallUser}>Call</button>}
-      {myStream && <button onClick={sendStream}>Send Stream</button>}
+    <div className="flex flex-col items-center justify-center w-full h-screen p-6">
+      <h4 className="mb-4 text-3xl text-center text-white">
+        {remoteSocketId ? (
+          <div className="flex flex-col items-center justify-center w-full p-6 space-y-4 text-center bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 text-transparent bg-clip-text">
+            <span>Yay, we found an expert for you!</span>
+          </div>
+        ) : (
+          <span>No one in the room.</span>
+        )}
+      </h4>
+      {remoteSocketId && (
+        <button
+          className={`px-8 py-4 text-lg font-semibold text-white transition duration-300 bg-blue-500 rounded-full hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+            myStream && "hidden"
+          }`}
+          onClick={handleCallUser}
+        >
+          Say Hello!
+        </button>
+      )}
       {myStream && (
-        <>
-          <h1>My Stream</h1>
-          <video
-            ref={videoRef}
-            width="200px"
-            height="100px"
-            autoPlay
-            playsInline
-          ></video>
-        </>
+        <button
+          className={`px-8 py-4 text-lg font-semibold text-white transition duration-300 bg-blue-500 rounded-full hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+            callMaker ? "hidden" : ""
+          }`}
+          onClick={handleCallUser}
+        >
+          Accept Call
+        </button>
       )}
-      {remoteStream && (
-        <>
-          <h1>Remote Stream</h1>
-          <video
-            ref={videoRef}
-            width="200px"
-            height="100px"
-            autoPlay
-            playsInline
-          ></video>
-        </>
-      )}
-    </>
+      <div className="flex gap-96">
+        {myStream && (
+          <div className="mt-4">
+            <h1 className="mb-2 text-xl font-bold text-white">My Stream</h1>
+            <video
+              ref={videoRef}
+              width="300px"
+              height="150px"
+              autoPlay
+              playsInline
+              className="border-2 rounded-md border-black"
+            ></video>
+          </div>
+        )}
+        {remoteStream && (
+          <div className="mt-4">
+            <h1 className="mb-2 text-xl font-bold text-white">Remote Stream</h1>
+            <video
+              ref={videoRef}
+              width="300px"
+              height="150px"
+              autoPlay
+              playsInline
+              className="border-2 rounded-md border-black"
+            ></video>
+          </div>
+        )}
+      </div>
+    </div>
   );
 };
 
