@@ -8,7 +8,7 @@ export const myCustomUseSocketHook = () => {
 };
 const SocketContext = createContext(null);
 export const SocketProvider = (props) => {
-  const socket = useMemo(() => io("localhost:8000"), []);
+  const socket = useMemo(() => io("https://video-caller.onrender.com"), []);
   return (
     <SocketContext.Provider value={socket}>
       {props.children}
