@@ -102,16 +102,10 @@ function Lobby() {
           </div>
           <button
             className="btn glass"
-            onClick={handleGetStarted}
-            id="get-started-button"
           >
             <p className="text-gray-300 font-extralight hover:text-white">
               Connect with Expert →
             </p>
-          </button>
-          <button className="btn glass hidden" id="loading-button">
-            <span className="loading loading-spinner font-extralight"></span>
-            <p className="font-extralight">Connecting...</p>
           </button>
         </form>
       </div>

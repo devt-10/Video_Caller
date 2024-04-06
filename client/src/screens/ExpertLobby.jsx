@@ -99,17 +99,10 @@ function Lobby() {
               onChange={(e) => setRoom(e.target.value)}
             />
           </div>
-          <button
-            className="btn glass"
-            id="get-started-button"
-          >
+          <button className="btn glass">
             <p className="text-gray-300 font-extralight hover:text-white">
               Connect with Client →
             </p>
-          </button>
-          <button className="btn glass hidden" id="loading-button">
-            <span className="loading loading-spinner font-extralight"></span>
-            <p className="font-extralight">Connecting...</p>
           </button>
         </form>
       </div>
