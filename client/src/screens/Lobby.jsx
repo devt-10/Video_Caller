@@ -14,14 +14,6 @@ function Lobby() {
     (e) => {
       e.preventDefault();
       socket.emit("room:join", { email, room });
-      axios
-        .post(`/check/${email}`)
-        .then((res) => {
-          console.log(res.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
     },
     [email, room, socket]
   );
