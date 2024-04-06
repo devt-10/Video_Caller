@@ -101,7 +101,6 @@ function Lobby() {
           </div>
           <button
             className="btn glass"
-            onClick={handleGetStarted}
             id="get-started-button"
           >
             <p className="text-gray-300 font-extralight hover:text-white">
