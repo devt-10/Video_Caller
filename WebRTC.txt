@@ -1,0 +1,74 @@
+WebRTC
+
+it is technology built into the browser
+it helps transfer limitless data without any server between two browsers
+
+
+now how do you know which computer you wanna video call or share data?
+ans: you must know the ip address of that pc
+now there are 2 ips public and private
+now your pc knows your private ip but not the public ip.  
+
+
+
+lets say there are three devices at my house.
+1. laptop with ip address say 1
+2. mobile with ip address say 2
+
+now they connnect to the router which connects to the internet.
+lets say i wanna connect to some device in another home which has its private ip as 1. now can i connect them? no! 
+we must know the public ip of these two devices in order to do that.
+
+
+how will the devices know what public ip they are having?
+ans: they need someone to tell them.
+who will tell them?
+ans: something called as an ice server or turn server which returns a response with the public ip of a device which makes a request to it.
+
+now once these 2 devices know their public ip
+
+now they must be shared with each other to know that they need to connect....just like when i get a new phone number i need to call my friend to see my contact number.. this is called SIGNALLING
+
+SIGNALLING 
+now this is done through a node server (ik we mentioned there is no server but it has only one time use...) this node server takes the sesssion description and makes it available to the other pc. once the ips are shared with each other the servers job is done and then these 2 pcs can share data and video and whatnot via the UDP protocol
+
+DRAWBACKS:
+
+only 2 peopple can connect!
+
+only p2p connection (peer to peer)
+
+
+so most of the big companies use sfu architechture which is essentially:
+
+lets say there are 4 clients wanting to connect on a call.
+now there is a central client computer which acts as a server and establishes a p2p with each of the 4 clients and them combines the feed into one stream and then sends each of the 4 clients the combined stream via p2p...this is sfu
+
+
+this entire thing is the concept of webrtc!
+
+
+
+
+
+
+After receiving an offer or an answer, a peer sets the received session description as the remote description using this method.
+When you initiate a call, you create an offer, set it as the local description, and send it to the other peer. The other peer receives this offer, sets it as the remote description, creates an answer, and sets the answer as its local description. This process establishes a connection between the two peers.
+Here's a simplified sequence of steps in a WebRTC call initiation:
+
+Caller (Peer A):
+
+Create an offer (createOffer).
+Set the offer as the local description (setLocalDescription).
+Send the offer to the remote peer.
+Callee (Peer B):
+
+Receive the offer.
+Set the offer as the remote description (setRemoteDescription).
+Create an answer (createAnswer).
+Set the answer as the local description (setLocalDescription).
+Send the answer back to the caller.
+Caller (Peer A):
+
+Receive the answer.
+Set the answer as the remote description (setRemoteDescription).

@@ -128,7 +128,7 @@ const Room = () => {
       <h1>Room</h1>
       <h4>{remoteSocketId ? "Connected" : "No one in the room"}</h4>
       {remoteSocketId && <button onClick={handleCallUser}>Call</button>}
-      { myStream && <button onClick={sendStream}>Send Stream</button>}
+      {myStream && <button onClick={sendStream}>Send Stream</button>}
       {myStream && (
         <>
           <h1>My Stream</h1>
