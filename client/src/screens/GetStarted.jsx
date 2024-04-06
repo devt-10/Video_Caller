@@ -1,8 +1,10 @@
 import React from "react";
 import Navbar from "../components/Navbar";
+import { useNavigate } from "react-router-dom";
 //import button from d
 
 export default function GetStarted() {
+  const navigate = useNavigate();
   function getMouseCoordinates(e) {
     const blob = document.getElementById("blob");
     const squareToBeBlurred = document.getElementById("squareToBeBlurred");
@@ -27,7 +29,7 @@ export default function GetStarted() {
     loadingButton.classList.remove("hidden");
     //wait for 5 seconds and then redirect
     setTimeout(() => {
-      window.location.href = "/lobby";
+      navigate("/lobby");
     }, 4000);
   }
 
