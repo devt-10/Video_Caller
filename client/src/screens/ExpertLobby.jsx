@@ -36,10 +36,6 @@ function Lobby() {
     button.classList.add("hidden");
     const loadingButton = document.getElementById("loading-button");
     loadingButton.classList.remove("hidden");
-    //wait for 5 seconds and then redirect
-    setTimeout(() => {
-      // window.location.href = "/lobby";
-    }, 4000);
   }
   return (
     <div className="h-[100vh]">
